@@ -1,25 +1,31 @@
-import masks
+from src.masks import get_mask_card_number
+from src.masks import get_mask_account
 
 
 def mask_account_card(my_string: str) -> str:
     """Функция обработки банковских карт или счетов"""
     new_string = ""
-    my_list = my_string.split()
-    if "Счет" in my_string:
-        for my_item in my_list:
-            if my_item.isdigit():
-                new_item = masks.get_mask_account(int(my_item))
+    if isinstance(my_string, str) is False:
+        raise TypeError('Не верный тип данных')
+    elif str(my_string) == "":
+        raise ValueError("Не введён номер карты или счёта")
     else:
-        for my_item in my_list:
-            if my_item.isdigit():
-                new_item = masks.get_mask_card_number(int(my_item))
+        my_list = my_string.split()
+        if "Счет" in my_string:
+            for my_item in my_list:
+                if my_item.isdigit():
+                    new_item = get_mask_account(int(my_item))
+        else:
+            for my_item in my_list:
+                if my_item.isdigit():
+                    new_item = get_mask_card_number(int(my_item))
     my_list[-1] = new_item
     new_string = " ".join(my_list)
 
     return new_string
 
 
-# print(mask_account_card("Счет 73654108430135874305"))
+print(mask_account_card("Счет 73654108430135874305"))
 
 
 def get_date(date_string: str) -> str:
