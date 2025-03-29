@@ -1,6 +1,6 @@
 import pytest
 from src.widget import mask_account_card
-# from src.widget import get_date
+from src.widget import get_date
 
 
 @pytest.fixture
@@ -28,7 +28,7 @@ def test_type_number_card_or_account():
         mask_account_card([10, 12, 20])
 
 
-def test_invalid_number_card_or_account(fixture_card):
+def test_invalid_number_card_or_account():
     with pytest.raises(ValueError):
         mask_account_card("7000")
 
@@ -42,7 +42,20 @@ def fixture_date():
     return ("2024-03-11T02:26:18.671407")
 
 
+def test_get_date(fixture_date):
+    assert get_date(fixture_date) == "11.03.2024"
+
 def test_type_date():
     with pytest.raises(TypeError):
-        mask_account_card(101220)
+        get_date(101220)
+
+
+def test_empty_date():
+    with pytest.raises(ValueError):
+        get_date("")
+
+
+def test_invalid_date():
+    with pytest.raises(ValueError):
+        get_date("ghfdslkhslkh")
 

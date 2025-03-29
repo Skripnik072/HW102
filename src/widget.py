@@ -1,8 +1,9 @@
-from src.masks import get_mask_account, get_mask_card_number
-
+from src.masks import get_mask_account
+from src.masks import get_mask_card_number
 
 def mask_account_card(my_string: str) -> str:
     """Функция обработки банковских карт или счетов"""
+    global new_item
     new_string = ""
     if isinstance(my_string, str) is False:
         raise TypeError('Не верный тип данных')
@@ -36,6 +37,10 @@ def get_date(date_string: str) -> str:
     # new_string = ".".join(new_list)
     if isinstance(date_string, str) is False:
         raise TypeError('Не верный тип данных')
+    elif str(date_string) == "":
+        raise ValueError("Не введена строка с датой")
+    elif date_string.isalpha():
+        raise ValueError("В строке отсутствует дата")
     else:
         return ".".join(date_string[0:-16].split("-")[::-1])
 
