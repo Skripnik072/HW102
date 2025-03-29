@@ -1,6 +1,6 @@
 def get_mask_card_number(number_card: str) -> str:
     """Функция возвращает маску номера банковской карты"""
-    if isinstance(number_card, int) is False:
+    if isinstance(number_card, str) is False:
         raise TypeError('Не верный тип данных')
     elif str(number_card) == "":
         raise ValueError("Не введён номер карты")
@@ -17,9 +17,9 @@ def get_mask_card_number(number_card: str) -> str:
 # print(get_mask_card_number(7000792289606361))
 
 
-def get_mask_account(bank_account: int) -> str:
+def get_mask_account(bank_account: str) -> str:
     """Функция возвращает маску банковского счёта"""
-    if isinstance(bank_account, int) is False:
+    if isinstance(bank_account, str) is False:
         raise TypeError('Не верный тип данных')
     elif bank_account == "":
         raise ValueError("Не введён номер счёта")
