@@ -1,10 +1,9 @@
-from src.masks import get_mask_account
-from src.masks import get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(my_string: str) -> str:
     """Функция обработки банковских карт или счетов"""
-    global new_item
+#    global new_item
     new_string = ""
     if isinstance(my_string, str) is False:
         raise TypeError('Не верный тип данных')
@@ -13,6 +12,7 @@ def mask_account_card(my_string: str) -> str:
     elif 40 < len(str(my_string)) < 16:
         raise ValueError("Неверный номер карты")
     else:
+        new_item = ""
         my_list = my_string.split()
         if "Счет" in my_string:
             for my_item in my_list:
