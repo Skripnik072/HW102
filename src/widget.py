@@ -1,6 +1,7 @@
 from src.masks import get_mask_account
 from src.masks import get_mask_card_number
 
+
 def mask_account_card(my_string: str) -> str:
     """Функция обработки банковских карт или счетов"""
     global new_item
@@ -27,7 +28,7 @@ def mask_account_card(my_string: str) -> str:
     return new_string
 
 
-# print(mask_account_card("Счет 73654108430135874305"))
+print(mask_account_card("Счет 73654108430135874305"))
 
 
 def get_date(date_string: str) -> str:
