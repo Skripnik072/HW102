@@ -27,7 +27,12 @@ def filter_by_state(my_list: list, state: str = 'EXECUTED') -> list:
 
 def sort_by_date(my_list: list, reverse: bool = True) -> list:
     '''Функция сортирует список словарей по дате'''
-    sorted_list = sorted(my_list, key=lambda x: x['date'], reverse=reverse)
+    if isinstance(my_list, list) is False:
+        raise TypeError('Не верный тип данных')
+    elif my_list == []:
+        raise ValueError("Список пустой")
+    else:
+        sorted_list = sorted(my_list, key=lambda x: x['date'], reverse=reverse)
     return sorted_list
 
 

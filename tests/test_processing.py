@@ -60,3 +60,13 @@ def test_invalid_key(fixture_list_dict):
 
 def test_sort_by_date(my_list, expected):
     assert sort_by_date(my_list) == expected
+
+
+def test_type_list():
+    with pytest.raises(TypeError):
+        sort_by_date('9970909')
+
+
+def test_empty_list_():
+    with pytest.raises(ValueError):
+        sort_by_date([])
