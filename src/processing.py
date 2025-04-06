@@ -26,6 +26,7 @@ def filter_by_state(my_list: list, state: str = 'EXECUTED') -> list:
 
 def sort_by_date(my_list: list, reverse: bool = True) -> list:
     '''Функция сортирует список словарей по дате'''
+    global sorted_list
     if isinstance(my_list, list) is False:
         raise TypeError('Не верный тип данных')
     elif my_list == []:

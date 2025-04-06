@@ -131,7 +131,7 @@ def test_sort_by_date_reverse(my_list: list, reverse: bool, expected: list) -> N
 
 def test_type_list() -> None:
     with pytest.raises(TypeError):
-        sort_by_date(["9970909"])
+        sort_by_date("01011966", reverse=False)
 
 
 def test_empty_list_() -> None:

@@ -98,7 +98,7 @@ def test_transaction_descriptions(transactions: list, expected: str) -> None:
 
 def test_type_list_dct() -> None:
     with pytest.raises(TypeError):
-        transaction_descriptions("test")  # type: ignore
+        transaction_descriptions("01011966", "test")  # type: ignore
 
 
 def test_empty_list_dct(fixture_empty) -> None:
