@@ -3,6 +3,11 @@ from typing import Any, Generator
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
+@pytest.fixture
+def fixture_empty() -> list[Any]:
+    return ([])
+
+
 @pytest.mark.parametrize(
     "transactions, currency, expected",
     [
@@ -52,9 +57,9 @@ def test_type_list_dic() -> None:
         filter_by_currency("test")  # type: ignore
 
 
-def test_empty_list_diс() -> None:
+def test_empty_list_diс(fixture_empty) -> None:
     with pytest.raises(ValueError):
-        next(filter_by_currency([], ""))
+        next(filter_by_currency(fixture_empty, ""))
 
 
 @pytest.mark.parametrize(
@@ -95,9 +100,9 @@ def test_type_list_dct() -> None:
         transaction_descriptions("test")  # type: ignore
 
 
-def test_empty_list_dct() -> None:
+def test_empty_list_dct(fixture_empty) -> None:
     with pytest.raises(ValueError):
-        next(transaction_descriptions([]))
+        next(transaction_descriptions(fixture_empty)) # type: ignore
 
 
 @pytest.mark.parametrize(
@@ -115,9 +120,9 @@ def test_type_number() -> None:
 
 def test_uncorrect_number() -> None:
     with pytest.raises(ValueError):
-        next(card_number_generator(1, -3))
+        next(card_number_generator(1, -3)) # type: ignore
 
 
 def test_uncorrect_numb() -> None:
     with pytest.raises(TypeError):
-        next(card_number_generator(-3))
+        next(card_number_generator(-3)) # type: ignore

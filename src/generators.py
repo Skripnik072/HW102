@@ -1,4 +1,3 @@
-import pytest
 from typing import Any, Generator
 
 
@@ -74,7 +73,7 @@ descrip = transaction_descriptions(
         {
             "id": 142264268,
             "state": "EXECUTED",
-           "date": "2019-04-04T23:20:05.206878",
+            "date": "2019-04-04T23:20:05.206878",
             "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
             "description": "Перевод со счета на счет",
             "from": "Счет 19708645243227258542",
@@ -109,6 +108,7 @@ def card_number_generator(begin_number: int, end_number: int) -> list[str]:
             my_list.append(my_string)
             int_card += 1
     return my_list
+
 
 for card_number in card_number_generator(1, 3):
     print(card_number)
