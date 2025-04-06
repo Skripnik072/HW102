@@ -47,6 +47,7 @@ def fixture_empty() -> list[Any]:
         )
     ],
 )
+
 def test_filter_by_currency(transactions: list, currency: str, expected: list) -> None:
     result = filter_by_currency(transactions, currency)
     assert next(result) == expected
