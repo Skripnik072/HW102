@@ -115,4 +115,9 @@ def test_type_number() -> None:
 
 def test_uncorrect_number() -> None:
     with pytest.raises(ValueError):
-        card_number_generator(-1, -2)
+        next(card_number_generator(1, -3))
+
+
+def test_uncorrect_numb() -> None:
+    with pytest.raises(TypeError):
+        next(card_number_generator(-3))

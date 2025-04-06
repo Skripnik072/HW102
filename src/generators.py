@@ -60,31 +60,31 @@ def transaction_descriptions(transactions: list) -> Generator[Any, Any, None]:
             yield new_string
 
 
-# descrip = transaction_descriptions(
-#    [
-#        {
-#            "id": 939719570,
-#            "state": "EXECUTED",
-#            "date": "2018-06-30T02:08:58.425572",
-#            "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
-#            "description": "Перевод организации",
-#            "from": "Счет 75106830613657916952",
-#            "to": "Счет 11776614605963066702",
-#        },
-#        {
-#            "id": 142264268,
-#            "state": "EXECUTED",
-#            "date": "2019-04-04T23:20:05.206878",
-#            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
-#            "description": "Перевод со счета на счет",
-#            "from": "Счет 19708645243227258542",
-#            "to": "Счет 75651667383060284188",
-#        },
-#    ],
-# )
+descrip = transaction_descriptions(
+    [
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 11776614605963066702",
+        },
+        {
+            "id": 142264268,
+            "state": "EXECUTED",
+           "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
+        },
+    ],
+)
 
-# for _ in range(2):
-#    print(next(descrip))
+for _ in range(2):
+    print(next(descrip))
 
 # result = transaction_descriptions([])
 # print(next(result))
@@ -98,6 +98,8 @@ def card_number_generator(begin_number: int, end_number: int) -> list[str]:
         raise TypeError('Не верный тип данных')
     elif isinstance(end_number, int) is False:
         raise TypeError('Не верный тип данных')
+    elif not begin_number or not end_number:
+        raise TypeError('Нет начала или конца диапазона')
     elif begin_number < 0 or end_number < 0:
         raise ValueError("Введено некорреткное число")
     else:
