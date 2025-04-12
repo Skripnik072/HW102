@@ -1,16 +1,20 @@
 from time import time
 
+from typing import Callable
 
-def log(filename=""):
+from typing import Any
+
+
+def log(filename: str = "") -> str:
     """Декоратор для регистрации названия функции, её результатов и ошибок"""
 
-    def my_decorators(func):
-        def wrapper(*args, **kwargs):
+    def my_decorators(func: Callable) -> Callable:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
                 start_time = time()
                 result = func(*args, **kwargs)
                 end_time = time()
-                log_result = f"{func.__name__} ok Time for work: {start_time - end_time}\n"
+                log_result = f"{func.__name__} ok Время работы: {round((end_time - start_time) * 1000000, 2)} c\n"
                 if filename:
                     with open(filename, "a", encoding="utf-8") as names_file:
                         names_file.write(log_result)
@@ -19,7 +23,7 @@ def log(filename=""):
                     print(log_result)
                 return result
             except Exception as e:
-                log_result = f" {func.__name__} error {e} Input: {args}, {kwargs}\n"
+                log_result = f" {func.__name__} error {e} Ошибка в работе декоратора. Input: {args}, {kwargs}\n"
                 if filename:
                     with open(filename, "a", encoding="utf-8") as names_file:
                         names_file.write(log_result)
@@ -33,7 +37,7 @@ def log(filename=""):
 
 
 @log()
-def my_function(x, y):
+def my_function(x: int, y: int) -> int:
     return x + y
 
 
