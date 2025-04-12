@@ -1,4 +1,5 @@
 import pytest
+
 from src.decorators import log, my_function
 
 
@@ -28,4 +29,4 @@ def test_log_error():
 def test_log_output(capsys):
     my_function(3, 1)
     captured = capsys.readouterr()
-    assert captured.out == 'my_function ok\n\n'
+    assert captured.out == 'my_function ok Time for work: -4.76837158203125e-07\n\n'
