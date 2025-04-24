@@ -9,8 +9,6 @@ def filter_by_state(my_list: list, state: str = 'EXECUTED') -> list:
     return [i for i in my_list if i['state'] == state]
 
 
-
-
 print(filter_by_state([{'id': 41428829, 'state': 'CANCELED', 'date': '2019-07-03T18:35:29.512364'}], "EXECUTED"))
 
 

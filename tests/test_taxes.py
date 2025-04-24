@@ -10,7 +10,6 @@ def prices():
 @pytest.mark.parametrize("tax_rate, expected", [(10, [110, 220, 330]),
                                                 (15, [115, 230, 345]),
                                                 (20, [120, 240, 360])])
-
 def test_calculate_taxes(prices, tax_rate, expected):
     assert calculate_taxes(prices, tax_rate) == expected
 
@@ -23,4 +22,3 @@ def test_invalid_tax_rate(prices):
 def test_invalid_prices(prices):
     with pytest.raises(ValueError):
         calculate_taxes([0, -10], tax_rate=10)
-
