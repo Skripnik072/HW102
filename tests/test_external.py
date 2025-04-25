@@ -1,5 +1,4 @@
 from locale import currency
-
 import requests
 from unittest.mock import patch, MagicMock
 from src.external_api import get_user_convert

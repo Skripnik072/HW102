@@ -1,7 +1,7 @@
 import json
 import os
 import logging
-from external_api import get_user_convert
+from src.external_api import get_user_convert
 
 
 logger = logging.getLogger(__name__)

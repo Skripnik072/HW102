@@ -17,7 +17,8 @@ def get_external_csv(path: str) -> list[dict]:
                 my_list.append(my_dict)
             print(my_list)
         return my_list
-    except
+    except FileNotFoundError:
+        raise FileNotFoundError ("Файл не найден")
 
 
 
