@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 def get_user_convert(amount: str, currency: str) -> str:
     '''Функция запрашивает курс для конвертации заданной валюты'''
 
-    url = f"https://api.apilayer.com/exchangerates_data/convert?to={currency}&from=RUB&amount={amount}"
+    url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={currency}&amount={amount}"
     load_dotenv()
     headers = {
         'apikey': os.getenv('API_KEY')
