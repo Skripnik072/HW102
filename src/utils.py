@@ -35,9 +35,9 @@ def get_finans_tranz(path: str) -> dict:
     return list_tr_actions
 
 
-if __name__ == '__main__':
-    list_j = get_finans_tranz("date\\oper1.json")
-    print(list_j)
+# if __name__ == '__main__':
+#     list_j = get_finans_tranz("date\\oper1.json")
+#    print(list_j)
 
 
 def get_t_action_currency(tr_action: dict, amount=None) -> float:
@@ -66,13 +66,13 @@ def get_t_action_currency(tr_action: dict, amount=None) -> float:
             logger.info('Транзакция не в валюте RUB. Конвертируем с помощью API')
             amount = i["operationAmount"]["amount"]
             currency = i["operationAmount"]["currency"]["code"]
-            amount_rub = get_user_convert(amount, currency)
+            amount_rub = round(get_user_convert(amount, currency), 2)
         else:
             continue
     logger.info(f'Сумма транзакции: {amount_rub} руб.')
     return amount_rub
 
 
-list_j = get_finans_tranz("date\\oper1.json")
-amount_rub = get_t_action_currency(list_j)
-print(f"Сумма транзакции {amount_rub} руб.")
+# list_j = get_finans_tranz("date\\oper1.json")
+# amount_rub = get_t_action_currency(list_j)
+# print(f"Сумма транзакции {amount_rub} руб.")
