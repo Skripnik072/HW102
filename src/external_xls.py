@@ -19,7 +19,7 @@ def get_external_xls(path: str) -> list[dict]:
         raise FileNotFoundError("Файл не найден")
 
 
-# if __name__ == '__main__':
-#    list_new = get_external_xls("date\\transactions_excel.xlsx")
-#    print(list_new)
+if __name__ == '__main__':
+    list_new = get_external_xls("date\\transactions_excel.xlsx")
+    print(list_new)
 
