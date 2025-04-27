@@ -1,5 +1,4 @@
-import re
-
+from collections import Counter, defaultdict
 
 my_list = [{'id': '650703', 'state': 'EXECUTED', 'date': '2023-09-05T11:30:32Z', 'amount': '16210',
            'currency_name': 'Sol', 'currency_code': 'PEN', 'from': 'Счет 58803664561298323391',
@@ -24,19 +23,21 @@ my_list = [{'id': '650703', 'state': 'EXECUTED', 'date': '2023-09-05T11:30:32Z',
            'currency_name': 'Yuan Renminbi', 'currency_code': 'CNY', 'from': 'Visa 2759011965877198',
            'to': 'Счет 38287443300766991082', 'description': 'Перевод с карты на карту'}]
 
-def select_from_dict(my_list: list, string: str) -> list:
-    '''Функция отфильтровывает словарь по регулярному выражению (строке)'''
+kat_list = ['Перевод организации', 'Перевод с карты на карту', 'Открытие вклада']
+
+def list_from_dict(my_list: list, kat_list: list) -> dict:
+    '''Функция преобразует список словарей транзакций в словарь, где ключи - названия категорий
+    транзакций, а значения - количество операций в данной категории'''
     new_list = []
+    my_dict = defaultdict(list)
     for i in my_list:
-        if re.search(string, i["description"], flags=re.I):
-            new_list.append(i)
-        else:
-            continue
-        print(new_list)
+        new_list.append(i['description'])
+    counted = Counter(new_list)
+    count = counted.most_common(10)
+    for j in count:
+        my_dict[j[0]] = j[1]
+    return my_dict
 
 
 if __name__ == '__main__':
-    new_list = select_from_dict(my_list, "Перевод организации")
-
-
-
+    new_dict = list_from_dict(my_list, kat_list)
