@@ -1,15 +1,11 @@
-def calculate_taxes(prices: list[float], tax_rate: float) -> list[float]:
-    """Функция вычисляет стоимость товаров с учётом налога."""
+"Программа: Привет! Добро пожаловать в программу работы
+с банковскими транзакциями.
+Выберите необходимый пункт меню:
+1. Получить информацию о транзакциях из JSON-файла
+2. Получить информацию о транзакциях из CSV-файла
+3. Получить информацию о транзакциях из XLSX-файла"
 
-    if tax_rate < 0:
-        raise ValueError('Неверный налоговый процент')
 
-    taxed_prices = []
 
-    for price in prices:
-        if price <= 0:
-            raise ValueError('Неверная цена')
-        tax = price * tax_rate / 100
-        taxed_prices.append(price + tax)
-
-    return taxed_prices
+# def calculate_taxes(prices: list[float], tax_rate: float) -> list[float]:
+#    """Функция вычисляет стоимость товаров с учётом налога."""

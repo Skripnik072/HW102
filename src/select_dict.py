@@ -24,19 +24,20 @@ my_list = [{'id': '650703', 'state': 'EXECUTED', 'date': '2023-09-05T11:30:32Z',
            'currency_name': 'Yuan Renminbi', 'currency_code': 'CNY', 'from': 'Visa 2759011965877198',
            'to': 'Счет 38287443300766991082', 'description': 'Перевод с карты на карту'}]
 
+
 def select_from_dict(my_list: list, string: str) -> list:
     '''Функция отфильтровывает словарь по регулярному выражению (строке)'''
     new_list = []
+    if not isinstance(string, str):
+        raise TypeError('Некорректный тип транзакции')
+
     for i in my_list:
         if re.search(string, i["description"], flags=re.I):
             new_list.append(i)
         else:
             continue
-        print(new_list)
+    return new_list
 
 
 if __name__ == '__main__':
     new_list = select_from_dict(my_list, "Перевод организации")
-
-
-

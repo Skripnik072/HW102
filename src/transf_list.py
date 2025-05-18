@@ -23,21 +23,29 @@ my_list = [{'id': '650703', 'state': 'EXECUTED', 'date': '2023-09-05T11:30:32Z',
            'currency_name': 'Yuan Renminbi', 'currency_code': 'CNY', 'from': 'Visa 2759011965877198',
            'to': 'Счет 38287443300766991082', 'description': 'Перевод с карты на карту'}]
 
-kat_list = ['Перевод организации', 'Перевод с карты на карту', 'Открытие вклада']
+kat_dict = {'Перевод организации': 0, 'Перевод с карты на карту': 0, 'Открытие вклада': 0}
 
-def list_from_dict(my_list: list, kat_list: list) -> dict:
+
+def list_from_dict(my_list: list, kat_dict: dict) -> dict:
     '''Функция преобразует список словарей транзакций в словарь, где ключи - названия категорий
     транзакций, а значения - количество операций в данной категории'''
     new_list = []
+    new_dict = {}
     my_dict = defaultdict(list)
     for i in my_list:
         new_list.append(i['description'])
     counted = Counter(new_list)
     count = counted.most_common(10)
+    print(count)
     for j in count:
         my_dict[j[0]] = j[1]
-    return my_dict
+    for key1 in kat_dict.keys():
+        for key, value in my_dict.items():
+            if key1 == key:
+                new_dict[key] = value
+    return new_dict
 
 
-if __name__ == '__main__':
-    new_dict = list_from_dict(my_list, kat_list)
+# if __name__ == '__main__':
+#    n_dict = list_from_dict(my_list, kat_dict)
+#    print(n_dict)
