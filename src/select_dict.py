@@ -39,5 +39,5 @@ def select_from_dict(my_list: list, string: str) -> list:
     return new_list
 
 
-if __name__ == '__main__':
-    new_list = select_from_dict(my_list, "Перевод организации")
+# if __name__ == '__main__':
+#    new_list = select_from_dict(my_list, "Перевод организации")
