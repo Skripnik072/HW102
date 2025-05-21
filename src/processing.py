@@ -1,12 +1,14 @@
 def filter_by_state(my_list: list, state: str = 'EXECUTED') -> list:
     '''Функция отфильтровывает список словарей по ключу state'''
     new_list = []
-#    for dict in my_list:
-#        for key, value in dict.items():
-#            if value == state:
-#                new_list.append(dict)
-#    return new_list
-    return [i for i in my_list if i['state'] == state]
+    for dict in my_list:
+        status_key = dict.get('state')
+        for key, value in dict.items():
+            if value == state:
+                new_list.append(dict)
+    return new_list
+
+#    return [i for i in my_list if i['state'] == state]
 
 
 # print(filter_by_state([{'id': 41428829, 'state': 'CANCELED', 'date': '2019-07-03T18:35:29.512364'}], "EXECUTED"))
@@ -35,3 +37,9 @@ def filter_by_currency(my_list: list, currency: str = 'RUB') -> list:
 #            'from': 'MasterCard 7158300734726758', 'to': 'Счет 35383033474447895560'}]
 
 # print(filter_by_currency(my_list, currency="RUB"))
+
+def filter_by_description(my_list: list, word: str) -> list:
+    '''Функция отфильтровывает список словарей по слову из описания'''
+    new_list = []
+
+    return [i for i in my_list if word in i['description']]

@@ -19,7 +19,7 @@ def mask_account_card(my_string: str) -> str:
     return new_string
 
 
-# print(mask_account_card("Счет 73654108430135874305"))
+print(mask_account_card("Счет 73654108430135874305"))
 
 
 def get_date(date_string: str) -> str:
