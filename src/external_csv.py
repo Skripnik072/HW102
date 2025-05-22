@@ -1,5 +1,6 @@
 import csv
-import pandas as pd
+
+# import pandas as pd
 
 
 def get_external_csv(path: str) -> list[dict]:
@@ -18,9 +19,7 @@ def get_external_csv(path: str) -> list[dict]:
 #            print(my_list)
         return my_list
     except FileNotFoundError:
-        raise FileNotFoundError ("Файл не найден")
-
-
+        raise FileNotFoundError("Файл не найден")
 
 # if __name__ == '__main__':
 #    list_new = get_external_csv("date\\transactions.csv")

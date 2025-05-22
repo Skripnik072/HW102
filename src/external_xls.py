@@ -1,5 +1,6 @@
 import pandas as pd
-import openpyxl
+
+# import openpyxl
 
 
 def get_external_xls(path: str) -> list[dict]:
@@ -22,4 +23,3 @@ def get_external_xls(path: str) -> list[dict]:
 # if __name__ == '__main__':
 #    list_new = get_external_xls("date\\transactions_excel.xlsx")
 #    print(list_new)
-

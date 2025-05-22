@@ -1,4 +1,4 @@
-import masks
+from masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(my_string: str) -> str:
@@ -8,11 +8,11 @@ def mask_account_card(my_string: str) -> str:
     if "Счет" in my_string:
         for my_item in my_list:
             if my_item.isdigit():
-                new_item = masks.get_mask_account(int(my_item))
+                new_item = get_mask_account(int(my_item))
     else:
         for my_item in my_list:
             if my_item.isdigit():
-                new_item = masks.get_mask_card_number(int(my_item))
+                new_item = get_mask_card_number(int(my_item))
     my_list[-1] = new_item
     new_string = " ".join(my_list)
 

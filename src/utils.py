@@ -1,11 +1,12 @@
 import json
 import os
+
 from external_api import get_user_convert
 
 
-def get_finans_tranz(path: str) -> dict:
+def get_finans_tranz(path: str) -> list:
     ''' Возвращает из JSON список словарей с финансовыми транзакциями'''
-    my_list = []
+    my_list: list = []
     if not os.path.exists(path):
         raise FileNotFoundError("Файл не найден")
     if os.path.getsize(path) == 0:
@@ -28,7 +29,7 @@ def get_finans_tranz(path: str) -> dict:
 #    print(list_j)
 
 
-def get_t_action_currency(tr_action: dict, amount=None) -> float:
+def get_t_action_currency(tr_action: dict, amount: str = None) -> float:
     '''Функция принимает тразакцию и возвращет её сумму'''
 #    amount_rub = ""
     if tr_action == {}:

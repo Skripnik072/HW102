@@ -5,7 +5,7 @@ def get_user_convert(amount: str, currency: str) -> str:
     '''Функция запрашивает курс для конвертации заданной валюты'''
 
     url = f"https://api.apilayer.com/exchangerates_data/convert?to={currency}&from=RUB&amount={amount}"
-    payload = {}
+#    payload = {}
     headers = {
         'apikey': "clRtFIX4we3pMNXuluKfc26nNdY9LjoQ"
     }

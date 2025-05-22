@@ -1,15 +1,13 @@
-from utils import get_finans_tranz
 from external_csv import get_external_csv
 from external_xls import get_external_xls
-from processing import filter_by_state, sort_by_date, filter_by_currency, filter_by_description
+from processing import filter_by_currency, filter_by_description, filter_by_state, sort_by_date
+from utils import get_finans_tranz
 from widget import get_date, mask_account_card
-
 
 """Сводный модуль для работы с транзакциями"""
 
 print('''Программа: Привет! Добро пожаловать в программу работы с банковскими транзакциями.
-      "Выберите необходимый пункт меню:
-      
+      "Выберите необходимый пункт меню:   
       1. Получить информацию о транзакциях из JSON-файла"
       2. Получить информацию о транзакциях из CSV-файла
       3. Получить информацию о транзакциях из XLSX-файла''')
@@ -47,8 +45,6 @@ while status not in ["EXECUTED", "CANCELED", "PENDING"]:
 if status in ["EXECUTED", "CANCELED", "PENDING"]:
     print(f"Операции отфильтрованы по статусу {status}")
     list_state = filter_by_state(list_new, status)
-# print(list_state)
-print(choice_file)
 
 print("Отсортировать операции по дате? Да/Нет")
 sort_yes = input()
@@ -57,7 +53,7 @@ while sort_tr not in ["да", "нет"]:
     print("Некорректный выбор. Ввведите Да или Нет!")
     sort_yes = input()
     sort_tr = sort_yes.lower()
-if sort_tr == "нет":
+if sort_tr in "нет":
     sorted_list = list_state
 else:
     print("Отсортировать по возрастанию или по убыванию?")
@@ -79,9 +75,9 @@ while sort_rus not in ["да", "нет"]:
     print("Некорректный выбор. Ввведите Да или Нет!")
     sort_rub = input()
     sort_rus = sort_rub.lower()
-if sort_rus == "да" and choice_file == "1":
+if sort_rus in "да" and choice_file in "1":
     list_trans = filter_by_currency(sorted_list, currency="RUB")
-elif sort_rub == "да" and choice_file == "2" or "3":
+elif sort_rub in "да" and choice_file in ["2", "3"]:
     list_trans = [i for i in sorted_list if i.get('currency_code') == "RUB"]
 else:
     list_trans = sorted_list
@@ -94,9 +90,9 @@ while filter_yes not in ["да", "нет"]:
     print("Некорректный выбор. Ввведите да или нет!")
     filter_y = input()
     filter_yes = filter_y.lower()
-if filter_yes == "нет":
+if filter_yes in "нет":
     list_transactions = list_trans
-elif filter_yes == "да":
+elif filter_yes in "да":
     print("Введите слово для поиска")
     word = input()
     n = 0
