@@ -26,7 +26,7 @@ def filter_by_currency(my_list: list, currency: str = 'RUB') -> list:
     '''Функция отфильтровывает список словарей по ключу currency_code'''
     new_list = []
 
-    return [i for i in my_list if i['operationAmount']['currency']['code'] == currency]
+    return [i for i in my_list if i.get('operationAmount', {}).get('currency', {}).get('code') == currency]
 
 
 # my_list = [{'id': 441945886, 'state': 'EXECUTED', 'date': '2019-08-26T10:50:58.294041', 'operationAmount':

@@ -16,17 +16,21 @@ print('''Программа: Привет! Добро пожаловать в п
 
 source = input()
 list_new = []
+choice_file = "0"
 while source not in ["1", "2", "3"]:
     print("Некорректный выбор. Выберите заново")
     source = input()
 if source == "1":
     print("Для обработки выбран JSON-файл.")
+    choice_file = "1"
     list_new = get_finans_tranz("date\\operations.json")
 elif source == "2":
     print("Для обработки выбран CSV-файл.")
+    choice_file = "2"
     list_new = get_external_csv("date\\transactions.csv")
 elif source == "3":
     print("Для обработки выбран XLSX-файл.")
+    choice_file = "3"
     list_new = get_external_xls("date\\transactions_excel.xlsx")
 
 print("Введите статус, по которому необходимо выполнить фильтрацию.")
@@ -44,6 +48,7 @@ if status in ["EXECUTED", "CANCELED", "PENDING"]:
     print(f"Операции отфильтрованы по статусу {status}")
     list_state = filter_by_state(list_new, status)
 # print(list_state)
+print(choice_file)
 
 print("Отсортировать операции по дате? Да/Нет")
 sort_yes = input()
@@ -74,32 +79,34 @@ while sort_rus not in ["да", "нет"]:
     print("Некорректный выбор. Ввведите Да или Нет!")
     sort_rub = input()
     sort_rus = sort_rub.lower()
-if sort_rus == "нет":
-    list_trans = sorted_list
-else:
+if sort_rus == "да" and choice_file == "1":
     list_trans = filter_by_currency(sorted_list, currency="RUB")
-# print(list_trans)
+elif sort_rub == "да" and choice_file == "2" or "3":
+    list_trans = [i for i in sorted_list if i.get('currency_code') == "RUB"]
+else:
+    list_trans = sorted_list
 
 print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
 filter_y = input()
 filter_yes = filter_y.lower()
+word = ""
 while filter_yes not in ["да", "нет"]:
     print("Некорректный выбор. Ввведите да или нет!")
     filter_y = input()
     filter_yes = filter_y.lower()
 if filter_yes == "нет":
     list_transactions = list_trans
-else:
+elif filter_yes == "да":
     print("Введите слово для поиска")
     word = input()
     n = 0
-for i in list_trans:
-    if word in i['description']:
-        n =+ 1
-while n == 0:
-    print("Нет таких слов в описании транзакций. Введите другое слово")
-    word = input()
-list_transactions = filter_by_description(list_trans, word)
+    for i in list_trans:
+        if word in i['description']:
+            n += 1
+    while n == 0:
+        print("Нет таких слов в описании транзакций. Введите другое слово")
+        word = input()
+    list_transactions = filter_by_description(list_trans, word)
 
 length_list = len(list_transactions)
 if length_list == 0:
@@ -108,11 +115,26 @@ print("Распечатываю итоговый список транзакци
 
 print(f"Всего банковских операций в выборке: {length_list}")
 for i in list_transactions:
+    if choice_file in ["3", "2"]:
+        amount_trans = i.get('amount')
+        curreny_trans = i['currency_code']
+        date_trans = ".".join(i['date'][0:-10].split("-")[::-1])
+    else:
+        amount_trans = i.get('operationAmount', {}).get('amount')
+        curreny_trans = i.get('operationAmount', {}).get('currency', {}).get('name')
+        date_trans = get_date(i['date'])
 
-    date_trans = get_date(i['date'])
-    from_trans = mask_account_card(i.get('from', "00000000000000000000"))
+    descr_trans = i['description']
     to_trans = mask_account_card(i['to'])
-    print(f"{date_trans} {i['description']}")
-    print(f"{from_trans} -> {to_trans}")
-    print(f"Сумма {i['operationAmount']['amount']} {i['operationAmount']['currency']['name']}")
-    print("")
+
+    if i['description'] in "Открытие вклада":
+        print(f"{date_trans} {descr_trans}")
+        print(to_trans)
+        print(f"Сумма {amount_trans} {curreny_trans}")
+        print("")
+    else:
+        from_trans = mask_account_card(i.get('from'))
+        print(f"{date_trans} {descr_trans}")
+        print(f"{from_trans} -> {to_trans}")
+        print(f"Сумма {amount_trans} {curreny_trans}")
+        print("")
